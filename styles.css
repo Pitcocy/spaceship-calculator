@@ -1,3 +1,4 @@
+/* Base styles */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #0c0c0c;
@@ -5,9 +6,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
-    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .calculator-container {
@@ -17,6 +19,8 @@ body {
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
     position: relative;
     overflow: hidden;
+    width: 100%;
+    max-width: 400px;
 }
 
 .calculator-container::before {
@@ -38,25 +42,20 @@ body {
 }
 
 @keyframes scan {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-50%);
-    }
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
 }
 
 .calculator {
     backdrop-filter: blur(5px);
     padding: 20px;
     border-radius: 15px;
-    width: 300px;
 }
 
 h1 {
     text-align: center;
     margin-bottom: 20px;
-    font-size: 24px;
+    font-size: clamp(18px, 5vw, 24px);
     text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
 }
 
@@ -76,6 +75,7 @@ input, select {
     border-radius: 5px;
     color: #00ff00;
     font-size: 16px;
+    box-sizing: border-box;
 }
 
 input::placeholder {
@@ -127,13 +127,44 @@ select {
 }
 
 @keyframes fly {
-    0% {
-        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+    0% { transform: translate(-50%, -50%) scale(0.5) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) scale(2) rotate(180deg); }
+    100% { transform: translate(-50%, -50%) scale(0.5) rotate(360deg); }
+}
+
+/* Media Queries for better responsiveness */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
     }
-    50% {
-        transform: translate(-50%, -50%) scale(2) rotate(180deg);
+
+    .calculator-container {
+        padding: 15px;
     }
-    100% {
-        transform: translate(-50%, -50%) scale(0.5) rotate(360deg);
+
+    .calculator {
+        padding: 15px;
+    }
+
+    input, select, .calculate-btn {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 320px) {
+    .calculator-container {
+        padding: 10px;
+    }
+
+    .calculator {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    input, select, .calculate-btn {
+        font-size: 12px;
     }
 }
